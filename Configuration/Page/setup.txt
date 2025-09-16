@@ -1,0 +1,41 @@
+# Page default permissions
+TCEMAIN {
+    permissions.user = show, editcontent, edit, new, delete
+    permissions.group = show, editcontent, edit, new, delete
+}
+
+TCEFORM.pages.subtitle.label = Hero-Text oben auf der Seite
+
+RTE.config.tx_news_domain_model_news.bodytext.preset = ttnews
+RTE.config.tt_content.bodytext.preset = ttcontent
+
+
+// Setup Content ContentElement
+mod.wizards.newContentElement.wizardItems.common {
+    elements {
+        tx_rw_content {
+            iconIdentifier = my-icon-id
+            title = Content
+            description = Place content on website
+            tt_content_defValues {
+                CType = tx_rw_content
+            }
+        }
+        tx_rw_googlemaps {
+            iconIdentifier = my-icon-id
+            title = Google Maps
+            description = Place a Google Map
+            tt_content_defValues {
+                CType = tx_rw_googlemaps
+            }
+        }
+    }
+    show = *
+}
+
+# Fallback fields for tweeter on news records
+# see also EXT:cs_seo/Configuration/TSconfig/news.ts
+tx_csseo.1.fallback.tw_title = title
+tx_csseo.1.fallback.tw_description = description
+
+tx_csseo.1.fallback.og_description = teaser

@@ -1,0 +1,20 @@
+plugin.tx_rw {
+    settings {
+
+        # cat=rw; type=text; label=Page uid of footer
+        footerPid = 48
+
+        # cat=rw; type=text; label=Google Maps API Key
+        googleMapsApiKey =
+    }
+
+}
+
+plugin.tx_news {
+    rss.channel {
+        title = Reason Why
+        link = http://typo3/
+    }
+}
+
+styles.content.allowTags:= addToList(iframe).

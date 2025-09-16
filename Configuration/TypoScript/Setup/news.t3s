@@ -1,0 +1,104 @@
+plugin.tx_news {
+    # override specific news templates
+    view {
+        templateRootPaths.100 = EXT:rw/Resources/Private/News/Templates/
+        layoutRootPaths.100 = EXT:rw/Resources/Private/News/Layouts/
+        partialRootPaths.100 = EXT:rw/Resources/Private/News/Partials/
+    }
+
+}
+
+lib.newsDetailNewsList = USER
+lib.newsDetailNewsList {
+    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+    extensionName = News
+    pluginName = Pi1
+    vendorName = GeorgRinger
+
+    switchableControllerActions {
+        News {
+            1 = list
+        }
+    }
+
+    settings < plugin.tx_news.settings
+    settings {
+        useStdWrap = templateLayout,startingpoint,detailPid,listPid,orderDirection,orderBy,recursive,titleButton,categories,defaultDetailPid,limit,includeSubCategories, offset,itemsPerPage,title
+        templateLayout.cObject = TEXT
+        templateLayout.cObject.field = templateLayout
+        detailPid.cObject = TEXT
+        detailPid.cObject.field = detailPid
+        defaultDetailPid.cObject = TEXT
+        defaultDetailPid.cObject.field = defaultDetailPid
+        listPid.cObject = TEXT
+        listPid.cObject.field = listPid
+        overrideFlexformSettingsIfEmpty := addToList(detailPid)
+        startingpoint.cObject = TEXT
+        startingpoint.cObject.field = startingpoint
+        categories.cObject = TEXT
+        categories.cObject.field = categories
+        limit.cObject = TEXT
+        limit.cObject.value = 9999
+        limit.cObject.override.field = limit
+        includeSubCategories.cObject = TEXT
+        includeSubCategories.cObject.value = 0
+        includeSubCategories.cObject.override.field = includeSubCategories
+        categoryConjunction = or
+        excludeAlreadyDisplayedNews = 1
+        detailPidDetermination =
+        list.paginate.itemsPerPage = 4
+        #offset = 4
+        title.cObject = TEXT
+        title.cObject.field = title
+        newsItem.cObject = TEXT
+        newsItem.cObject.field = newsItemDetailUid
+    }
+}
+
+[getTSFE().type == 9818]
+    lib.stdheader >
+    tt_content.stdWrap.innerWrap >
+    tt_content.stdWrap.wrap >
+    tt_content.stdWrap.editPanel = 0
+    # get away <div class="feEditAdvanced-firstWrapper" ...> if your logged into the backend
+    styles.content.get.stdWrap >
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = none
+        admPanel = 0
+        debug = 0
+        disablePrefixComment = 1
+        metaCharset = utf-8
+        additionalHeaders.10.header = Content-Type:application/xml;charset=utf-8
+        #additionalHeaders.10.header = Content-Type:application/rss+xml;charset=utf-8
+        absRefPrefix = {$plugin.tx_news.rss.channel.link}
+        linkVars >
+    }
+
+    pageNewsRSS = PAGE
+    pageNewsRSS {
+        typeNum = 9818
+        10 < tt_content.list.20.news_pi1
+        10 {
+            switchableControllerActions {
+    			News {
+    				1 = list
+    			}
+    		}
+            settings < plugin.tx_news.settings
+            settings {
+                #categories = 9
+                categoryConjunction = or
+                #limit = 30
+                detailPid = 57
+                startingpoint = 38
+                format = xml
+            }
+        }
+}
+
+plugin.tx_news.settings.format = xml
+plugin.tx_news.settings.disableOverrideDemand = 0
+[END]
+
+plugin.tx_news.settings.detail.checkPidOfNewsRecord = 1

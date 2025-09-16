@@ -1,0 +1,88 @@
+page = PAGE
+page {
+    # Configuration
+    config {
+        # has to be set to 0 on production for search to work
+        no_cache = 0
+
+        # Index search activation / will only work in combination with cache
+        index_enable = 1
+
+        # To have error messages shown in FE
+        contentObjectExceptionHandler = 1
+
+        # Absolute reference for links
+        absRefPrefix = /
+
+        # Compress CSS
+        compressCss = 0
+
+        # Concatenate CSS
+        concatenateCss = 0
+
+        # Compress JS
+        compressJs = 0
+
+        # Concatenate JS
+        concatenateJs = 0
+    }
+
+    # Viewport configuration
+    headerData.32 = TEXT
+    headerData.32.value = <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    # Favicon
+    headerData.400 = TEXT
+    headerData.400.value (
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/manifest.json">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#61ab86">
+        <meta name="theme-color" content="#4e916f">
+    )
+
+    # Define CSS
+    includeCSS {
+        googleFonts = EXT:rw/Resources/Public/Styles/googleFonts.css
+        reason_why_styleguide = /reason-why-styleguide/Public/Styles/reason-why.min.css
+        # reason_why_newslist = /assets/css/c-news-list.css
+    }
+
+    # Include javascripts
+    includeJS {
+        ccm = https://consent.comply-app.com/auto-load-before-consent.js
+        ccmapp = https://consent.comply-app.com/js/app.js
+        ccoverlay = https://consent.comply-app.com/overlay.js
+        ccoverlay.type = module
+        reason_why_styleguide = /reason-why-styleguide/Public/Scripts/reason-why.js
+        reason_why_styleguide.async = 1
+        reason_why_styleguide.type = module
+    }
+
+    headerData {
+        21 = TEXT
+        21.value (
+        <script type="text/javascript">
+            if(window.ENV === undefined) { window.ENV = {}; }; window.ENV.googleMapsKey = '{$plugin.tx_rw.settings.googleMapsApiKey}';
+        </script>
+        )
+    }
+
+    # Page Controller
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = Rw
+        pluginName = ReasonWhy
+        controllerName = Page
+        vendorName = Vtm
+        switchableControllerActions {
+            Page {
+                1 = default
+            }
+        }
+    }
+}
+
+@import 'EXT:rw/Configuration/TypoScript/Setup/*.t3s'
