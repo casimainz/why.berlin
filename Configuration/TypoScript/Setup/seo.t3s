@@ -1,0 +1,96 @@
+# Configuration for pagination pages above 0
+
+[traverse(request.getQueryParams(), 'tx_news_pi1/@widget_0/currentPage') > 0]
+    # Remove canonical
+    page.headerData.654.10 >
+
+    # Add noindex, follow
+    #page.headerData.654.15 >
+    #page.headerData.654.15 = TEXT
+    #page.headerData.654.15.value = <meta name="robots" content="noindex,follow">
+
+    lib.currentUrl >
+    page.headerData.65 = TEXT
+    page.headerData.65.value = <meta name="robots" content="noindex,follow">
+
+    page.config.index_enable = 0
+[END]
+
+plugin.tx_seo.config {
+    xmlSitemap {
+        sitemaps {
+            articles {
+                provider = TYPO3\CMS\Seo\XmlSitemap\RecordsXmlSitemapDataProvider
+                config {
+                    table = tx_news_domain_model_news
+                    additionalWhere =
+                    sortField = sorting
+                    lastModifiedField = tstamp
+                    changeFreqField = sitemap_changefreq
+                    priorityField = sitemap_priority
+                    pid = 38
+                    recursive = 2
+                    url {
+                        pageId = 57
+                        fieldToParameterMap {
+                            uid = tx_news_pi1[news]
+                        }
+                        additionalGetParameters {
+                            tx_news_pi1.controller = News
+                            tx_news_pi1.action = detail
+                        }
+                        useCacheHash = 1
+                    }
+                }
+            }
+            news {
+                provider = TYPO3\CMS\Seo\XmlSitemap\RecordsXmlSitemapDataProvider
+                config {
+                    table = tx_news_domain_model_news
+                    additionalWhere =
+                    sortField = sorting
+                    lastModifiedField = tstamp
+                    changeFreqField = sitemap_changefreq
+                    priorityField = sitemap_priority
+                    pid = 63
+                    recursive = 2
+                    url {
+                        pageId = 64
+                        fieldToParameterMap {
+                            uid = tx_news_pi1[news]
+                        }
+                        additionalGetParameters {
+                            tx_news_pi1.controller = News
+                            tx_news_pi1.action = detail
+                        }
+                        useCacheHash = 1
+                    }
+                }
+            }
+            events {
+                provider = TYPO3\CMS\Seo\XmlSitemap\RecordsXmlSitemapDataProvider
+                config {
+                    table = tx_news_domain_model_news
+                    additionalWhere =
+                    sortField = sorting
+                    lastModifiedField = tstamp
+                    changeFreqField = sitemap_changefreq
+                    priorityField = sitemap_priority
+                    pid = 51
+                    recursive = 2
+                    url {
+                        pageId = 58
+                        fieldToParameterMap {
+                            uid = tx_news_pi1[news]
+                        }
+                        additionalGetParameters {
+                            tx_news_pi1.controller = News
+                            tx_news_pi1.action = detail
+                        }
+                        useCacheHash = 1
+                    }
+                }
+            }
+        }
+    }
+}

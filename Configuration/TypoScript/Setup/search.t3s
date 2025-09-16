@@ -1,0 +1,23 @@
+plugin.tx_indexedsearch {
+
+    # Where are the templates
+    view {
+        templateRootPaths {
+            100 = EXT:rw/Resources/Private/IndexedSearch/Templates/
+        }
+        partialRootPaths {
+            100 = EXT:rw/Resources/Private/IndexedSearch/Partials/
+        }
+        layoutRootPath {
+            100 = EXT:rw/Resources/Private/IndexedSearch/Layouts/
+        }
+    }
+
+    # page id where the search list content element is placed
+    settings {
+        targetPid = 47
+    }
+}
+
+plugin.tx_rw.settings.searchTargetPid < plugin.tx_indexedsearch.settings.targetPid
+plugin.tx_news.settings.searchTargetPid < plugin.tx_indexedsearch.settings.targetPid

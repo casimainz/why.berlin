@@ -1,0 +1,104 @@
+# Load default processing options
+imports:
+    - { resource: "EXT:rte_ckeditor/Configuration/RTE/Processing.yaml" }
+    - { resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Base.yaml" }
+    - { resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Plugins.yaml" }
+
+editor:
+  config:
+    contentsCss: "EXT:rw/Resources/Public/CKE/Css/contents.css"
+
+    format_tags: "p;h1;h2;h3;h4;h5;h6;pre"
+
+    stylesSet:
+      # Object styles
+      - { name: "Big List", element: "ul", attributes: {'class': 'big'} }
+      - { name: "Mega List", element: "ul", attributes: {'class': 'explosion explosion-green explosion-tightest-bottom explosion-list'} }
+      - { name: "H1 as H1", element: "h1",  attributes: {'class': 'h1'} }
+      - { name: "H1 as H2", element: "h1",  attributes: {'class': 'h2'} }
+      - { name: "H1 as H3", element: "h1",  attributes: {'class': 'h3'} }
+      - { name: "H1 as H4", element: "h1",  attributes: {'class': 'h4'} }
+      - { name: "H1 as H5", element: "h1",  attributes: {'class': 'h5'} }
+      - { name: "H1 as H6", element: "h1",  attributes: {'class': 'h6'} }
+
+      - { name: "H2 as H1", element: "h2",  attributes: {'class': 'h1'} }
+      - { name: "H2 as H2", element: "h2",  attributes: {'class': 'h2'} }
+      - { name: "H2 as H3", element: "h2",  attributes: {'class': 'h3'} }
+      - { name: "H2 as H4", element: "h2",  attributes: {'class': 'h4'} }
+      - { name: "H2 as H5", element: "h2",  attributes: {'class': 'h5'} }
+      - { name: "H2 as H6", element: "h2",  attributes: {'class': 'h6'} }
+
+      - { name: "H3 as H1", element: "h3",  attributes: {'class': 'h1'} }
+      - { name: "H3 as H2", element: "h3",  attributes: {'class': 'h2'} }
+      - { name: "H3 as H3", element: "h3",  attributes: {'class': 'h3'} }
+      - { name: "H3 as H4", element: "h3",  attributes: {'class': 'h4'} }
+      - { name: "H3 as H5", element: "h3",  attributes: {'class': 'h5'} }
+      - { name: "H3 as H6", element: "h3",  attributes: {'class': 'h6'} }
+
+      - { name: "H4 as H1", element: "h4",  attributes: {'class': 'h1'} }
+      - { name: "H4 as H2", element: "h4",  attributes: {'class': 'h2'} }
+      - { name: "H4 as H3", element: "h4",  attributes: {'class': 'h3'} }
+      - { name: "H4 as H4", element: "h4",  attributes: {'class': 'h4'} }
+      - { name: "H4 as H5", element: "h4",  attributes: {'class': 'h5'} }
+      - { name: "H4 as H6", element: "h4",  attributes: {'class': 'h6'} }
+
+      - { name: "H5 as H1", element: "h5",  attributes: {'class': 'h1'} }
+      - { name: "H5 as H2", element: "h5",  attributes: {'class': 'h2'} }
+      - { name: "H5 as H3", element: "h5",  attributes: {'class': 'h3'} }
+      - { name: "H5 as H4", element: "h5",  attributes: {'class': 'h4'} }
+      - { name: "H5 as H5", element: "h5",  attributes: {'class': 'h5'} }
+      - { name: "H5 as H6", element: "h5",  attributes: {'class': 'h6'} }
+
+      - { name: "H6 as H1", element: "h6",  attributes: {'class': 'h1'} }
+      - { name: "H6 as H2", element: "h6",  attributes: {'class': 'h2'} }
+      - { name: "H6 as H3", element: "h6",  attributes: {'class': 'h3'} }
+      - { name: "H6 as H4", element: "h6",  attributes: {'class': 'h4'} }
+      - { name: "H6 as H5", element: "h6",  attributes: {'class': 'h5'} }
+      - { name: "H6 as H6", element: "h6",  attributes: {'class': 'h6'} }
+
+      - { name: "P as H1", element: "p",  attributes: {'class': 'h1'} }
+      - { name: "P as H2", element: "p",  attributes: {'class': 'h2'} }
+      - { name: "P as H3", element: "p",  attributes: {'class': 'h3'} }
+      - { name: "P as H4", element: "p",  attributes: {'class': 'h4'} }
+      - { name: "P as H5", element: "p",  attributes: {'class': 'h5'} }
+      - { name: "P as H6", element: "p",  attributes: {'class': 'h6'} }
+
+    toolbarGroups:
+      - { name: styles, groups: [ styles, format ] }
+      - { name: basicstyles, groups: [ basicstyles ] }
+      - { name: paragraph, groups: [ list, indent, blocks, align ] }
+      - { name: links, groups: [ links ] }
+      - { name: clipboard, groups: [ clipboard, cleanup, undo ] }
+      - { name: editing, groups: [ spellchecker ] }
+      - { name: insert, groups: [ insert ] }
+      - { name: tools, groups: [ table, specialchar ] }
+      - { name: document, groups: [ mode ] }
+
+    justifyClasses:
+      - text-left
+      - text-center
+      - text-right
+      - text-justify
+
+    extraPlugins:
+      - justify
+
+    removePlugins:
+      - image
+
+    removeButtons:
+      - Anchor
+      - Underline
+      - Strike
+
+  externalPlugins:
+    embeddedtwitter: { resource: "EXT:rw/Resources/Public/CKEPlugins/embeddedtwitter/plugin.js" }
+    embeddedgallery: { resource: "EXT:rw/Resources/Public/CKEPlugins/embeddedgallery/plugin.js" }
+    embeddedimage: { resource: "EXT:rw/Resources/Public/CKEPlugins/embeddedimage/plugin.js" }
+    embeddedgooglemaps: { resource: "EXT:rw/Resources/Public/CKEPlugins/embeddedgooglemaps/plugin.js" }
+    embeddedyoutube: { resource: "EXT:rw/Resources/Public/CKEPlugins/embeddedyoutube/plugin.js" }
+    embed: { resource: "EXT:rw/Resources/Public/CKEPlugins/embed/plugin.js" }
+    
+processing:
+  allowTags:
+    - iframe
