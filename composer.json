@@ -1,0 +1,26 @@
+{
+    "name": "typo3-local/rw",
+    "description": " - ",
+    "license": "GPL-2.0-or-later",
+    "type": "typo3-cms-extension",
+    "authors": [
+        {
+            "name": "",
+            "email": "no-email@given.com"
+        }
+    ],
+    "require": [],
+    "suggest": [],
+    "conflict": [],
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "rw"
+        }
+    },
+    "version": "dev-local",
+    "autoload": {
+        "classmap": [
+            "*"
+        ]
+    }
+}
