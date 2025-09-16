@@ -1,0 +1,161 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{newsItem}">
+    <div class="post-teaser {postTeaserClasses}">
+
+        <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+
+        <div class="post-teaser-image image-container">
+            <n:link
+              newsItem="{newsItem}"
+              settings="{settings}"
+              title="{strippedTitle}">
+            <f:image
+                    image="{newsItem.media.0}"
+                    title="{newsItem.media.0.title}"
+                    alt="{newsItem.media.0.alternative}"
+                    class="img-responsive"
+                    width="666c"
+                    height="665c"
+                    cropVariant="{cropVariant->v:or(alternative:'teaser')}"
+            />
+            </n:link>
+        </div>
+
+        <div class="post-teaser-content">
+            <h3 class="h3">
+                <n:link
+                        newsItem="{newsItem}"
+                        settings="{settings}"
+                        title="{strippedTitle}"
+                >
+                    {newsItem.title->rw:inteliText()}
+                </n:link>
+            </h3>
+
+            <div class="post-teaser-meta">
+                <span class="fa fa-calendar"></span><f:render partial="../../Partials/Date" arguments="{startDateTime: newsItem.datetime, endDateTime: newsItem.endDatetime, hideClock: 'true'}" />
+                <f:if condition="{newsItem.location}"><br /><span class="fa fa-location-arrow"></span>{newsItem.location}&nbsp;</f:if>
+            </div>
+        </div>
+
+        <f:if condition="{noTags}==FALSE">
+            <div class="post-teaser-tags">
+                <f:for each="{newsItem.tags}" as="tag">
+                    <span>#&nbsp;{tag.title}</span>
+                </f:for>
+            </div>
+        </f:if>
+    </div>
+
+</f:if>
+
+<f:section name="Events">
+    <f:if condition="{newsItem}">
+        <div class="post-teaser {postTeaserClasses}">
+
+            <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+
+            <div class="post-teaser-image image-container">
+                <n:link
+                        newsItem="{newsItem}"
+                        settings="{settings}"
+                        title="{strippedTitle}">
+                    <f:image
+                            image="{newsItem.media.0}"
+                            title="{newsItem.media.0.title}"
+                            alt="{newsItem.media.0.alternative}"
+                            class="img-responsive"
+                            width="666c"
+                            height="665c"
+                            cropVariant="{cropVariant->v:or(alternative:'teaser')}"
+                    />
+                </n:link>
+            </div>
+
+            <div class="post-teaser-content">
+                <h3 class="h3">
+                    <n:link
+                            newsItem="{newsItem}"
+                            settings="{settings}"
+                            title="{strippedTitle}"
+                    >
+                        {newsItem.title->rw:inteliText()}
+                    </n:link>
+                </h3>
+
+                <div class="">
+                    <f:render partial="../../Partials/Date" arguments="{startDateTime: newsItem.datetime, endDateTime: newsItem.endDatetime}" />
+                    <f:if condition="{newsItem.location}"><br />{newsItem.location}&nbsp;</f:if>
+                </div>
+            </div>
+
+            <f:if condition="{noTags}==FALSE">
+                <div class="post-teaser-tags">
+                    <f:for each="{newsItem.tags}" as="tag">
+                        <span>#&nbsp;{tag.title}</span>
+                    </f:for>
+                </div>
+            </f:if>
+        </div>
+
+    </f:if>
+</f:section>
+
+<f:section name="News">
+    <f:if condition="{newsItem}">
+        <div class="post-teaser {postTeaserClasses}">
+
+            <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+
+            <div class="post-teaser-content">
+                <h3 class="h4">
+                    <n:link
+                            newsItem="{newsItem}"
+                            settings="{settings}"
+                            title="{strippedTitle}"
+                    >
+                        {newsItem.title->rw:inteliText()}
+                    </n:link>
+                </h3>
+
+                <n:removeMediaTags>
+                    <f:if condition="{newsItem.teaser}">
+                        <f:then>
+                            <div class="post-teaser-content-cropped">{newsItem.teaser -> f:format.crop(maxCharacters:
+                                '{settings.cropMaxCharacters}', respectWordBoundaries:'1') -> f:format.html()}
+                            </div>
+                        </f:then>
+                        <f:else>
+                            <div class="post-teaser-content-cropped">{newsItem.bodytext -> f:format.crop(maxCharacters:
+                                '{settings.cropMaxCharacters}', respectWordBoundaries:'1') -> f:format.html()}
+                            </div>
+                        </f:else>
+                    </f:if>
+                </n:removeMediaTags>
+
+                <n:link
+                        newsItem="{newsItem}"
+                        settings="{settings}" class="post-teaser-link"
+                        title="{strippedTitle}">
+                    Learn More
+                </n:link>
+            </div>
+
+            <f:if condition="{noTags}==FALSE">
+                <div class="post-teaser-tags">
+                    <f:for each="{newsItem.tags}" as="tag">
+                        <span>#&nbsp;{tag.title}</span>
+                    </f:for>
+                </div>
+            </f:if>
+        </div>
+
+    </f:if>
+</f:section>
+
+</html>

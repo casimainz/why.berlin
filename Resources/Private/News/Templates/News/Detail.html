@@ -1,0 +1,66 @@
+{namespace n=GeorgRinger\News\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<n:excludeDisplayedNews newsItem="{newsItem}"/>
+<div style="font-family: Lato,sans-serif;font-size: 1.3rem;padding: 20px 0px 0px 0px;font-weight: 700;"><f:format.date format="d.m.Y">{newsItem.datetime}</f:format.date></div>
+
+
+
+<f:render partial="../../Partials/StickyShare" />
+
+    <div class="post">
+
+        <div class="content">
+            <h1>{newsItem.title->rw:inteliText()->f:format.stripTags()}</h1>
+
+            <v:variable.set name="category" value="{newsItem.categories->v:iterator.first()}" />
+            <v:variable.set name="categories" value="{category.uid}" />
+            <f:if condition="{category.title}==Event">
+                <f:then>
+                    <div class="post-date">
+                        <f:render partial="../../Partials/Date" arguments="{startDateTime:newsItem.datetime, endDateTime:newsItem.endDatetime}" />
+                        <f:if condition="{newsItem.location}"> | {newsItem.location}</f:if>
+                    </div>
+                </f:then>
+            </f:if>
+            {newsItem.bodytext->rw:embeddedContent(record: newsItem, media: newsItem.media)}
+        </div>
+        <f:comment>
+            <n:simplePrevNext pidList="{newsItem.pid}" news="{newsItem}" as="paginated" sortField="datetime">
+                <f:if condition="{paginated}">
+                    <ul class="pager">
+                        <f:if condition="{paginated.prev}">
+                            <li class="previous">
+                                <n:link newsItem="{paginated.prev}" settings="{settings}" class="next post__next-button">
+                                    <i style="padding-right: 20px;" class="fa fa-chevron-left"></i> Previous News
+                                </n:link>
+                            </li>
+                        </f:if>
+                        <f:if condition="{paginated.next}">
+                            <li class="next">
+                                <n:link newsItem="{paginated.next}" settings="{settings}" class="next post__next-button">
+                                    Next News <i style="padding-left: 20px;" class="fa fa-chevron-right"></i>
+                                </n:link>
+                            </li>
+                        </f:if>
+                    </ul>
+                </f:if>
+            </n:simplePrevNext>
+        </f:comment>
+    </div>
+    <f:if condition="{newsItem.contentElements}">
+        <!-- content elements -->
+        <f:cObject typoscriptObjectPath="lib.tx_news.contentElementRendering">{newsItem.contentElementIdList}</f:cObject>
+    </f:if>
+<f:render partial="Join/SubscribeContent" arguments="{_all}"/>
+<f:if condition="{settings.templateLayout} != '70'">
+    <f:if condition="{categories}">
+        <v:variable.set name="limit" value="9999" />
+        <v:variable.set name="title" value="More articles" />
+        <f:cObject typoscriptObjectPath="lib.newsDetailNewsList" data="{startingpoint:settings.startingpoint,detailPid:settings.detailPid,defaultDetailPid:settings.detailPid,listPid:settings.listPid,templateLayout:'51',categories:categories,limit:limit,title:title,newsItemDetailUid: newsItem.uid}"/>
+    </f:if>
+</f:if>
+<v:variable.unset name="categories"  />
+</html>

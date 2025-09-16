@@ -1,0 +1,91 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" xmlns:v="http://www.w3.org/1999/html"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<div class="explosion explosion-tight explosion-tighter-bottom explosion-green no-animation in-viewport">
+    <div class="explosion-content">
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="h2 row-header">More Tech and Business News</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <f:render partial="List/EventItem" section="News"
+                              arguments="{
+                                            newsItem: news.0,
+                                            settings:settings,
+                                            showImage: 1,
+                                            noTags: '1',
+                                            noCategory: '1',
+                                            cropVariant: 'teaser_widescreen',
+                                            postTeaserClasses:'post-teaser-without-image'
+                                          }"/>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <f:render partial="List/EventItem" section="News"
+                              arguments="{
+                                            newsItem: news.1,
+                                            settings:settings,
+                                            showImage: 1,
+                                            noTags: '1',
+                                            noCategory: '1',
+                                            cropVariant: 'teaser_widescreen',
+                                            postTeaserClasses:'post-teaser-without-image'
+                                          }"/>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <f:render partial="List/EventItem" section="News"
+                              arguments="{
+                                            newsItem: news.2,
+                                            settings:settings,
+                                            showImage: 1,
+                                            noTags: '1',
+                                            noCategory: '1',
+                                            cropVariant: 'teaser_widescreen',
+                                            postTeaserClasses:'post-teaser-without-image'
+                                          }"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                    <f:render partial="List/EventItem" section="News"
+                              arguments="{
+                                            newsItem: news.3,
+                                            settings:settings,
+                                            showImage: 1,
+                                            noTags: '1',
+                                            noCategory: '1',
+                                            cropVariant: 'teaser_widescreen',
+                                            postTeaserClasses:'post-teaser-without-image'
+                                          }"/>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <f:render partial="List/EventItem" section="News"
+                              arguments="{
+                                            newsItem: news.4,
+                                            settings:settings,
+                                            showImage: 1,
+                                            noTags: '1',
+                                            noCategory: '1',
+                                            cropVariant: 'teaser_widescreen',
+                                            postTeaserClasses:'post-teaser-without-image'
+                                          }"/>
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <f:render partial="List/EventItem" section="News"
+                              arguments="{
+                                            newsItem: news.5,
+                                            settings:settings,
+                                            showImage: 1,
+                                            noTags: '1',
+                                            noCategory: '1',
+                                            cropVariant: 'teaser_widescreen',
+                                            postTeaserClasses:'post-teaser-without-image'
+                                          }"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

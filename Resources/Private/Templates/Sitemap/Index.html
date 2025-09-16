@@ -1,0 +1,85 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<!--TYPO3SEARCH_end-->
+<div class="">
+
+    <div class="">
+
+        <div class="row">
+
+            <div class="hidden">
+
+                <f:render partial="Navigation.html" arguments="{navigationClasses: 'hidden-xs'}" />
+
+            </div>
+
+            <div class="col-12">
+                <div class="content">
+                    <ul>
+                        <f:render
+                                section="sitemapLevel"
+                                arguments="{rootUid: rootUid, sitemapTree: sitemapTree, newsByPage: newsByPage}"
+                        />
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<f:section name="sitemapLevel">
+    <f:for each="{sitemapTree}" as="sitemapItem">
+        <li>
+            <f:link.page pageUid="{sitemapItem.uid}">
+                {sitemapItem.title}
+            </f:link.page>
+            <v:variable.set name="news" value="{v:variable.get(name: 'newsByPage.{sitemapItem.uid}', useRawKeys: 1)}"/>
+            <f:if condition="{news->f:count()}">
+                <ul>
+                    <f:for each="{news}" as="newsItem">
+                        
+                        <li>
+                            <f:alias map="{newsItemTitle: '{newsItem.title->rw:inteliText()->f:format.stripTags()}'}">
+                                <f:if condition="{newsItem.categories.0.uid} == 7">
+                                    <f:then>
+                                        <n:link
+                                                newsItem="{newsItem}"
+                                                settings="{detailPid: '58'}"
+                                                title="{newsItemTitle}"
+                                        >
+                                            {newsItemTitle}
+                                        </n:link>
+                                    </f:then>
+                                    <f:else>
+                                        <n:link
+                                                newsItem="{newsItem}"
+                                                settings="{detailPid: '57'}"
+                                                title="{newsItemTitle}"
+                                        >
+                                            {newsItemTitle}
+                                        </n:link>
+                                    </f:else>
+                            </f:if>
+                            </f:alias>
+                        </li>
+                    </f:for>
+                </ul>
+            </f:if>
+            <f:if condition="{sitemapItem.children}">
+                <ul>
+                    <f:render section="sitemapLevel"
+                              arguments="{rootUid: rootUid, sitemapTree: sitemapItem.children, newsByPage: newsByPage}"
+                    />
+                </ul>
+            </f:if>
+        </li>
+    </f:for>
+</f:section>
+<!--TYPO3SEARCH_begin-->
+</html>

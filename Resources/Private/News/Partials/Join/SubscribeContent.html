@@ -1,0 +1,5 @@
+{namespace n=GeorgRinger\News\ViewHelpers}{namespace v=FluidTYPO3\Vhs\ViewHelpers}
+<v:variable.set name="newsletter" value="{v:content.get(column:'0',  pageUid:'59', limit:1, render:'FALSE')}" />
+<f:for each="{newsletter}" as="contentElement">
+    <v:content.render contentUids="{0:contentElement.uid}" />
+</f:for>

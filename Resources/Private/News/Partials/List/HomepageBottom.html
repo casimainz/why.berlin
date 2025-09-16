@@ -1,0 +1,41 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" xmlns:v="http://www.w3.org/1999/html"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<div class="explosion explosion-gray no-animation in-viewport">
+    <div class="explosion-content">
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <f:render partial="List/Item" section="Event"
+                          arguments="{newsItem: news.0, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+            </div>
+            <div class="col-sm-4 col-md-3">
+                <f:render partial="List/Item" section="Event"
+                          arguments="{newsItem: news.1, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+            </div>
+            <div class="col-sm-4 col-md-6">
+                <v:variable.set name="featuredEventId" value="{contentObjectData.tx_rw_featured_event}"/>
+                <v:variable.set name="eventRecord" value="{rw:getNewsRecord(uid:featuredEventId)}"/>
+
+                <div class="visible-sm">
+                    <f:render partial="List/EventItem" section="Events"
+                              arguments="{newsItem: eventRecord, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+                </div>
+                <div class="visible-xs visible-md visible-lg">
+                    <div>
+                        <f:render partial="List/FlyerItem"
+                                  arguments="{
+                                        newsItem: eventRecord,
+                                        settings:settings,
+                                        showImage: 1,
+                                        opacity: contentObjectData.tx_rw_featured_event_opacity,
+                                        cropVariant: 'teaser'
+                                      }"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,31 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{border_box}">
+    <f:then>
+        <div class="border-box" data-check-in-viewport="true">
+            <div class="border-box-content">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe src="{rw:youtubeUrl(url: '{url}')}">
+                        <f:if condition="{alternative_text}">
+                            <p>{alternative_text}</p>
+                        </f:if>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </f:then>
+    <f:else>
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe src="{rw:youtubeUrl(url: '{url}')}">
+                <f:if condition="{alternative_text}">
+                    <p>{alternative_text}</p>
+                </f:if>
+            </iframe>
+        </div>
+    </f:else>
+</f:if>
+
+</html>

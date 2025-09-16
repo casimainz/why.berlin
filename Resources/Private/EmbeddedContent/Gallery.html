@@ -1,0 +1,27 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<v:variable.set name="media" value="{v:variable.get(name: 'mediaByContentKey.{content_key}')}"/>
+<f:if condition="{media->f:count()}">
+    <f:for each="{media}" as="mediaItem" iteration="iterator">
+        <div class="row row-gallery {f:if(condition: iterator.isEven, then: 'row-gallery-inverse')}">
+            <div class="col-sm-6 col-lg-4 text-center">
+                <f:image
+                        image="{mediaItem}"
+                        title="{mediaItem.title}"
+                        alt="{mediaItem.alternative}"
+                        maxWidth="{max_width->v:or(alternative: '800')}"
+                        class="row-gallery-image"
+                />
+                <div class="caption">{mediaItem.description->rw:inteliText()}</div>
+            </div>
+            <div class="col-sm-6 col-lg-8">
+                {mediaItem.originalResource.properties.content->f:format.html()}
+            </div>
+        </div>
+    </f:for>
+</f:if>
+
+</html>

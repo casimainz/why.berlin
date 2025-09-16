@@ -1,0 +1,47 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+     data-namespace-typo3-fluid="true">
+
+    <f:if condition="{borderBox} == 1">
+        <f:then>
+            <div class="border-box" data-check-in-viewport="true">
+                <div class="border-box-content text-center">
+                    <f:image
+                            src="{image.uid}"
+                            treatIdAsReference="1"
+                            class="content-image img-responsive"
+                            maxWidth="{max_width->v:or(alternative: null)}"
+                    />
+                    <f:if condition="{image.description} || {image.content}">
+                        <div class="content-image-caption">
+                            <f:if condition="{image.description}">
+                                <span>{image.description->rw:inteliText()}</span>
+                            </f:if>
+                            {image.content->f:format.html()}
+                        </div>
+                    </f:if>
+                </div>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="text-center">
+                <f:image
+                        src="{image.uid}"
+                        treatIdAsReference="1"
+                        class="content-image img-responsive"
+                        maxWidth="{max_width->v:or(alternative: null)}"
+                />
+                <f:if condition="{image.description} || {image.content}">
+                    <div class="content-image-caption">
+                        <f:if condition="{image.description}">
+                            <span>{image.description->rw:inteliText()}</span>
+                        </f:if>
+                        {image.content->f:format.html()}
+                    </div>
+                </f:if>
+            </div>
+        </f:else>
+    </f:if>
+
+</div>

@@ -1,0 +1,212 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:comment>
+    <f:if condition="{newsItem}">
+        <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+        <div class="post-teaser {cropVariant}">
+            <n:link newsItem="{newsItem}" settings="{settings}" title="{strippedTitle}">
+                <f:if condition="{newsItem.falMedia}">
+                    <div class="post-teaser-image image-container">
+                        <v:variable.set name="mediaElement" value="{newsItem.falMedia -> v:iterator.first()}" />
+                        <f:image image="{mediaElement}" class="img-responsive" alt="" cropVariant="{cropVariant}"/>
+                    </div>
+                </f:if>
+            </n:link>
+            <f:if condition="{noCategory}==FALSE && {newsItem.firstCategory}">
+                <div class="post-teaser-category">
+                    <f:link.page pageUid="{newsItem.firstCategory.shortcut}">
+                        {newsItem.firstCategory.title}
+                    </f:link.page>
+                </div>
+            </f:if>
+            <div class="post-teaser-content">
+                <h2 class="{headerClasses->v:or(alternative:'h2')}">
+                    <n:link
+                            newsItem="{newsItem}"
+                            settings="{settings}"
+                            title="{strippedTitle}"
+                    >
+                        {newsItem.title->rw:inteliText()}
+                    </n:link>
+                </h2>
+            </div>
+        </div>
+
+    </f:if>
+</f:comment>
+
+<f:section name="Event">
+    <f:if condition="{newsItem}">
+        <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+        <div class="post-teaser {cropVariant}">
+            <n:link newsItem="{newsItem}" settings="{settings}" title="{strippedTitle}">
+                <f:if condition="{newsItem.falMedia}">
+                    <div class="post-teaser-image image-container">
+                        <v:variable.set name="mediaElement" value="{newsItem.falMedia -> v:iterator.first()}" />
+                        <f:image image="{mediaElement}" class="img-responsive" width="665c" height="665c" alt="" cropVariant="{cropVariant}"/>
+                    </div>
+                </f:if>
+            </n:link>
+            <f:if condition="{noCategory}==FALSE && {newsItem.firstCategory}">
+                <div class="post-teaser-category">
+                    <f:link.page pageUid="{newsItem.firstCategory.shortcut}">
+                        {newsItem.firstCategory.title}
+                    </f:link.page>
+                </div>
+            </f:if>
+            <div class="post-teaser-content">
+                <h4 class="{headerClasses->v:or(alternative:'h4')}">
+                    <n:link
+                            newsItem="{newsItem}"
+                            settings="{settings}"
+                            title="{strippedTitle}"
+                    >
+                        {newsItem.title->rw:inteliText()}
+                    </n:link>
+                </h4>
+            </div>
+        </div>
+
+    </f:if>
+</f:section>
+<f:section name="Top">
+    <f:if condition="{newsItem}">
+        <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+        <div class="post-teaser {cropVariant}">
+            <f:if condition="{newsItem.falMedia}">
+                <div class="post-teaser-image image-container">
+                    <n:link newsItem="{newsItem}" settings="{settings}" title="{strippedTitle}">
+                        <v:variable.set name="mediaElement" value="{newsItem.falMedia -> v:iterator.first()}" />
+                        <f:image image="{mediaElement}" class="img-responsive" alt="" width="1940c" height="902c" cropVariant="{cropVariant}"/>
+                    </n:link>
+                </div>
+            </f:if>
+            <f:if condition="{noCategory}==FALSE && {newsItem.firstCategory}">
+                <div class="post-teaser-category">
+                    <f:link.page pageUid="{newsItem.firstCategory.shortcut}">
+                        {newsItem.datetime->f:format.date(format: 'd.m.Y')} | {newsItem.firstCategory.title}
+                    </f:link.page>
+                </div>
+            </f:if>
+            <div class="post-teaser-content">
+                <h2 class="{headerClasses->v:or(alternative:'h2')}">
+                    <n:link
+                            newsItem="{newsItem}"
+                            settings="{settings}"
+                            title="{strippedTitle}"
+                    >
+                        {newsItem.title->rw:inteliText()}
+                    </n:link>
+                </h2>
+    </div>
+    </div>
+
+    </f:if>
+</f:section>
+<f:section name="NewTop">
+    <f:if condition="{newsItem}">
+        <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+        <div class="post-teaser {cropVariant}">
+            <f:if condition="{newsItem.falMedia}">
+                <div class="post-teaser-image image-container">
+                    <n:link newsItem="{newsItem}" settings="{settings}" title="{strippedTitle}">
+                        <v:variable.set name="mediaElement" value="{newsItem.falMedia -> v:iterator.first()}" />
+                        <f:image image="{mediaElement}" class="img-responsive" alt="" width="1940c" height="902c" cropVariant="{cropVariant}"/>
+                    </n:link>
+                </div>
+            </f:if>
+            <f:if condition="{noCategory}==FALSE && {newsItem.firstCategory}">
+                <div class="post-teaser-category">
+                    <f:link.page pageUid="{newsItem.firstCategory.shortcut}">
+                        {newsItem.datetime->f:format.date(format: 'd.m.Y')} | {newsItem.firstCategory.title}
+                    </f:link.page>
+                </div>
+            </f:if>
+            <div class="post-teaser-content">
+                <h2 class="{headerClasses->v:or(alternative:'h2')}">
+                    <n:link
+                            newsItem="{newsItem}"
+                            settings="{settings}"
+                            title="{strippedTitle}"
+                    >
+                        {newsItem.title->rw:inteliText()}
+                    </n:link>
+                </h2>
+                <p>{newsItem.bodytext -> f:format.html()}</p>
+            </div>
+        </div>
+    </f:if>
+</f:section>
+<f:section name="BottomFirst">
+    <f:if condition="{newsItem}">
+        <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+        <div class="post-teaser {cropVariant}">
+            <f:if condition="{newsItem.falMedia}">
+                <div class="post-teaser-image image-container">
+                    <n:link newsItem="{newsItem}" settings="{settings}" title="{strippedTitle}">
+                        <v:variable.set name="mediaElement" value="{newsItem.falMedia -> v:iterator.first()}" />
+                        <f:image image="{mediaElement}" class="img-responsive" alt="" width="800c" height="800c" cropVariant="{cropVariant}"/>
+                    </n:link>
+                </div>
+            </f:if>
+            <f:if condition="{noCategory}==FALSE && {newsItem.firstCategory}">
+                <div class="post-teaser-category">
+                    <f:link.page pageUid="{newsItem.firstCategory.shortcut}">
+                        {newsItem.datetime->f:format.date(format: 'd.m.Y')} | {newsItem.firstCategory.title}
+                    </f:link.page>
+                </div>
+            </f:if>
+            <div class="post-teaser-content">
+                <h4 class="{headerClasses->v:or(alternative:'h4')}">
+                    <n:link
+                            newsItem="{newsItem}"
+                            settings="{settings}"
+                            title="{strippedTitle}"
+                    >
+                        {newsItem.title->rw:inteliText()}
+                    </n:link>
+                </h4>
+            </div>
+        </div>
+
+    </f:if>
+</f:section>
+<f:section name="NewItem">
+    <f:if condition="{newsItem}">
+        <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+        <div class="post-teaser {cropVariant}">
+            <div class="post-teaser-category">
+                <f:link.page pageUid="{newsItem.firstCategory.shortcut}">
+                    {newsItem.datetime->f:format.date(format: 'd.m.Y')} | {newsItem.firstCategory.title}
+                </f:link.page>
+            </div>
+            <div class="post-teaser-content">
+                <h4>
+                    {newsItem.title->rw:inteliText()}
+                </h4>
+                <f:if condition="{newsItem.teaser}">
+					<f:then>
+						<p itemprop="description">{newsItem.teaser -> f:format.crop(maxCharacters: '{settings.cropMaxCharacters}', respectWordBoundaries:'1') -> f:format.html()}</p>
+					</f:then>
+					<f:else>
+						<p itemprop="description">{newsItem.bodytext -> f:format.crop(maxCharacters: '{settings.cropMaxCharacters}', respectWordBoundaries:'1') -> f:format.html()}</p>
+					</f:else>
+				</f:if>
+                <n:link
+                            newsItem="{newsItem}"
+                            settings="{settings}"
+                            title="{strippedTitle}"
+                            class="c-newsList_more"
+                    >
+                        Learn More
+                    </n:link>
+            </div>
+        </div>
+
+    </f:if>
+</f:section>
+</html>

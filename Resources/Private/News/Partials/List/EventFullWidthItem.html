@@ -1,0 +1,84 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{newsItem}">
+    <div class="post-teaser post-teaser-without-tags teaser-white-bg">
+
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="post-teaser-image image-container">
+                    <f:image
+                            image="{newsItem.media.0}"
+                            title="{newsItem.media.0.title}"
+                            alt="{newsItem.media.0.alternative}"
+                            class="img-responsive"
+                            cropVariant="{cropVariant}"
+                            width="285c"
+                            height="285c"
+                    />
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div class="post-teaser-content">
+
+                    <div class="post-teaser-category">
+                        <f:link.page pageUid="{newsItem.firstCategory.shortcut}">
+                            {newsItem.firstCategory.title}
+                        </f:link.page>
+                    </div>
+
+                    <h2 class="h2">
+                        <n:link
+                                newsItem="{newsItem}"
+                                settings="{settings}"
+                                title="{newsItem.title->rw:inteliText()->f:format.stripTags()}"
+                        >
+                            {newsItem.title->rw:inteliText()}
+                        </n:link>
+                    </h2>
+
+                    <div class="post-teaser-data">
+                        <f:render partial="../../Partials/Date"
+                                  arguments="{startDateTime: newsItem.datetime, endDateTime: newsItem.endDatetime}"/>
+                        <f:if condition="{newsItem.location}"> &nbsp;&nbsp;|&nbsp;&nbsp; {newsItem.location}</f:if>
+                    </div>
+
+                    <n:removeMediaTags>
+                        <f:if condition="{newsItem.teaser}">
+                            <f:then>
+                                <div>{newsItem.teaser -> f:format.crop(maxCharacters:
+                                    '{settings.cropMaxCharacters}', respectWordBoundaries:'1') -> f:format.html()}
+                                </div>
+                            </f:then>
+                            <f:else>
+                                <div>{newsItem.bodytext -> f:format.crop(maxCharacters:
+                                    '{settings.cropMaxCharacters}', respectWordBoundaries:'1') -> f:format.html()}
+                                </div>
+                            </f:else>
+                        </f:if>
+                    </n:removeMediaTags>
+
+                    <p>
+                        <n:link
+                                newsItem="{newsItem}"
+                                settings="{settings}" class="post-teaser-link"
+                                title="{newsItem.title}">
+                            Learn More
+                        </n:link>
+                    </p>
+
+                    <p class="post-teaser-tags">
+                        <f:for each="{newsItem.tags}" as="tag">
+                            <span>#&nbsp;{tag.title}</span>
+                        </f:for>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</f:if>
+
+</html>

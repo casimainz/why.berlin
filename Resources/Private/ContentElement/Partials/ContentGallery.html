@@ -1,0 +1,24 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+     data-namespace-typo3-fluid="true">
+
+    <f:for each="{images}" as="image" iteration="iterator">
+        <div class="row row-gallery {f:if(condition:iterator.isEven, then:'row-gallery-inverse')}">
+            <div class="col-sm-6 col-lg-4 text-center">
+                <f:image
+                        src="{image.uid}"
+                        treatIdAsReference="1"
+                        class="row-gallery-image"
+                        maxWidth="{max_width->v:or(alternative: null)}"
+                />
+                <f:if condition="{image.description}">
+                    <div class="caption">{image.description->rw:inteliText()}</div>
+                </f:if>
+            </div>
+            <div class="col-sm-6 col-lg-8">
+                {image.content->f:format.html()}
+            </div>
+        </div>
+    </f:for>
+</div>

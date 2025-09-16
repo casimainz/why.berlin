@@ -1,0 +1,81 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     data-namespace-typo3-fluid="true">
+
+
+    <div class="content content-padded">
+
+        <f:if condition="{data.header_layout}==0">
+            <f:then>
+                <v:tag name="h4" class="h2">{data.header->rw:inteliText()}</v:tag>
+            </f:then>
+            <f:else>
+                <v:tag name="h{data.header_layout}">{data.header->rw:inteliText()}</v:tag>
+            </f:else>
+        </f:if>
+
+        <f:if condition="{data.subheader}">
+            <f:then>
+                <h3>{data.subheader->rw:inteliText()}</h3>
+            </f:then>
+        </f:if>
+
+        {v:resource.record.fal(table: 'tt_content', field: 'image', record: data)
+        -> v:variable.set(name: 'images')}
+        <f:if condition="{images->f:count()} > 0">
+            <f:then>
+                <f:if condition="{images->f:count()} == 1">
+                    <f:then>
+                        <f:render
+                                partial="ContentImage"
+                                arguments="{
+                                    image:'{images->v:iterator.first()}',
+                                    borderBox:data.imageborder,
+                                    max_width: data.imagewidth
+                                    }"/>
+                    </f:then>
+                    <f:else>
+                        <f:render
+                                partial="ContentGallery"
+                                arguments="{
+                                    images: images,
+                                    max_width: data.imagewidth
+                                    }"/>
+                    </f:else>
+                </f:if>
+            </f:then>
+        </f:if>
+        {data.bodytext->rw:embeddedContent(record: data)}
+    </div>
+    <div class="hidden">
+        <div class="modal-box" id="signing-up-modal">
+            <div class="modal-box-logo">
+                <img src="/assets/img/reason-why-logo.svg" alt="REASON-WHY BERLIN">
+            </div>
+            <div class="modal-box-content">
+                <h2>Thank you for signing up!</h2>
+                <p>To complete the registration, please click on the link in the email we have just sent to you. If you don’t receive this email please check your spam folder.</p>
+            </div>
+        </div>
+        <div class="modal-box" id="subscribed-modal">
+            <div class="modal-box-logo">
+                <img src="/assets/img/reason-why-logo.svg" alt="REASON-WHY BERLIN">
+            </div>
+            <div class="modal-box-content">
+                <h2>You’re in!</h2>
+                <p>Your registration has been successful. Thank you for signing up.</p>
+            </div>
+        </div>
+        <div class="modal-box" id="unsubscribed-modal">
+            <div class="modal-box-logo">
+                <img src="/assets/img/reason-why-logo.svg" alt="REASON-WHY BERLIN">
+            </div>
+            <div class="modal-box-content">
+                <h2>Sorry to hear that!</h2>
+                <p>You have successfully unsubscribed.</p>
+            </div>
+        </div>
+    </div>
+</div>

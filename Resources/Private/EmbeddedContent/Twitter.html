@@ -1,0 +1,18 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <div class="explosion {explosion_color}">
+        <div class="explosion-content">
+            <div class="twitter">
+                <p class="twitter-content">{content->rw:inteliText()}</p>
+                <p class="twitter-link">
+                    <a class="sharer" data-sharer="twitter" data-title="{content->rw:inteliText()->f:format.stripTags()}">
+                        <span class="fa fa-twitter"></span>{link}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</html>

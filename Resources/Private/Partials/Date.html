@@ -1,0 +1,58 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{hideClock}">
+    <f:then>
+        <f:if condition="{startDateTime} && !{endDateTime}">
+            <f:format.date format="M j">{startDateTime}</f:format.date>
+        </f:if>
+
+        <f:if condition="{startDateTime} && {endDateTime} &&
+                        {startDateTime->f:format.date(format: 'Y-m-d')} == {endDateTime->f:format.date(format: 'Y-m-d')}
+        ">
+            <f:format.date format="M j">{startDateTime}</f:format.date>
+        </f:if>
+
+        <f:if condition="{startDateTime} && {endDateTime} &&
+                        {startDateTime->f:format.date(format: 'Y-m-d')} != {endDateTime->f:format.date(format: 'Y-m-d')}
+        ">
+            <f:format.date format="M j">{startDateTime}</f:format.date>
+            &nbsp;-&nbsp;
+            <f:format.date format="M j">{endDateTime}</f:format.date>
+        </f:if>
+    </f:then>
+    <f:else>
+        <f:if condition="{startDateTime} && !{endDateTime}">
+            <f:format.date format="M j">{startDateTime}</f:format.date>
+            &nbsp;<span class="fa fa-clock-o"></span>
+            <f:format.date format="g:i A">{startDateTime}</f:format.date>
+        </f:if>
+
+        <f:if condition="{startDateTime} && {endDateTime} &&
+                        {startDateTime->f:format.date(format: 'Y-m-d')} == {endDateTime->f:format.date(format: 'Y-m-d')}
+        ">
+            <f:format.date format="M j">{startDateTime}</f:format.date>
+            &nbsp;<span class="fa fa-clock-o"></span>
+            <f:format.date format="g:i A">{startDateTime}</f:format.date>
+            -
+            <f:format.date format="g:i A">{endDateTime}</f:format.date>
+        </f:if>
+
+        <f:if condition="{startDateTime} && {endDateTime} &&
+                        {startDateTime->f:format.date(format: 'Y-m-d')} != {endDateTime->f:format.date(format: 'Y-m-d')}
+        ">
+            <f:format.date format="M j">{startDateTime}</f:format.date>
+            &nbsp;<span class="fa fa-clock-o"></span>
+            <f:format.date format="g:i A">{startDateTime}</f:format.date>
+            &nbsp;-&nbsp;
+            <f:format.date format="M j">{endDateTime}</f:format.date>
+            &nbsp;<span class="fa fa-clock-o"></span>
+            <f:format.date format="g:i A">{endDateTime}</f:format.date>
+        </f:if>
+    </f:else>
+</f:if>
+
+
+</html>

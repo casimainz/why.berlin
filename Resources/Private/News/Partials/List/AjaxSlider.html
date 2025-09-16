@@ -1,0 +1,103 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" xmlns:v="http://www.w3.org/1999/html"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<div class="explosion explosion-tight explosion-tightest-bottom explosion-green">
+    <div class="explosion-content">
+
+        <f:if condition="{contentObjectData.header}">
+            <p class="h2 row-header">{contentObjectData.header->rw:inteliText()}</p>
+        </f:if>
+
+        <div class="hidden-xs">
+            <div class="row row-slider" data-ajax-column-slider="true">
+
+                <v:variable.set name="paginationConfiguration"
+                                value="{v:iterator.merge(a: settings.list.paginate, b: '{templatePath: \'EXT:rw/Resources/Private/News/Templates/ViewHelpers/Widget/Paginate/Arrows.html\'}', useKeys: 1)}"
+                />
+
+                <f:for each="{pagination.paginator.paginatedItems}" as="newsItem" iteration="iterator">
+                    <f:render section="archiveItem" arguments="{_all}" />
+                </f:for>
+
+                <f:render partial="List/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator}" />
+            </div>
+        </div>
+        <div class="visible-xs">
+            <div class="row row-slider row-slider-mobile"
+                 data-ajax-column-slider="true"
+                 data-nextPageColumnsSelector=".row-slider-mobile:first>[class*=col-]"
+                 data-nextPagePreviousButtonSelector=".row-slider-mobile:first>.row-slider-arrow-left"
+                 data-nextPageNextButtonSelector=".row-slider-mobile:first>.row-slider-arrow-right">
+
+                <v:variable.set name="paginationConfiguration"
+                                value="{v:iterator.merge(a: settings.list.paginate, b: '{itemsPerPage: 1, templatePath: \'EXT:rw/Resources/Private/News/Templates/ViewHelpers/Widget/Paginate/Arrows.html\'}', useKeys: 1)}"
+                />
+
+                <f:for each="{pagination.paginator.paginatedItems}" as="newsItem" iteration="iterator">
+                    <f:render section="archiveItem" arguments="{_all}" />
+                </f:for>
+
+                <f:render partial="List/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator}" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<f:section name="archiveItem">
+    <div class="col-sm-3">
+        <div class="post-teaser post-teaser-free post-teaser-without-tags">
+            <div class="post-teaser-image image-container">
+                <n:link
+                  newsItem="{newsItem}"
+                  settings="{settings}"
+                  title="{strippedTitle}">
+                <f:image
+                        image="{newsItem.media.0}"
+                        title="{newsItem.media.0.title}"
+                        alt="{newsItem.media.0.alternative}"
+                        maxWidth="600"
+                        class="img-responsive"
+                        cropVariant="teaser_widescreen"
+                />
+                </n:link>
+            </div>
+
+            <div class="post-teaser-content">
+                <h4 class="h4">
+                    <n:link
+                            newsItem="{newsItem}"
+                            settings="{settings}"
+                            title="{newsItem.title}"
+                    >
+                        {newsItem.title->rw:inteliText()}
+                    </n:link>
+                </h4>
+
+                <n:removeMediaTags>
+                    <f:if condition="{newsItem.teaser}">
+                        <f:then>
+                            {newsItem.teaser -> f:format.crop(maxCharacters:
+                            '{settings.cropMaxCharacters}', respectWordBoundaries:'1') ->
+                            f:format.html()}
+                        </f:then>
+                        <f:else>
+                            {newsItem.bodytext -> f:format.crop(maxCharacters:
+                            '{settings.cropMaxCharacters}', respectWordBoundaries:'1') ->
+                            f:format.html()}
+                        </f:else>
+                    </f:if>
+                </n:removeMediaTags>
+
+                <n:link
+                        newsItem="{newsItem}"
+                        settings="{settings}" class="post-teaser-link"
+                        title="{newsItem.title}">
+                    Learn More
+                </n:link>
+            </div>
+        </div>
+    </div>
+</f:section>
+</html>

@@ -1,0 +1,13 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<div class="post-teaser post-teaser-without-tags">
+    <div class="post-teaser-content" style="padding:1px"><!-- margin collapse :/ -->
+        <div class="content">
+            <h4 class="close-to-next">{row.title -> f:format.raw()}</h4>
+            <p>{row.description -> f:format.raw()}</p>
+        </div>
+        <p class="post-teaser-link">{row.title -> f:format.raw()}</p>
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,62 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" xmlns:v="http://www.w3.org/1999/html"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<div class="explosion explosion-gray explosion-tightest-bottom no-animation in-viewport">
+    <div class="explosion-content">
+        <div class="row">
+            <div class="hidden">
+                <f:render partial="../../Partials/Navigation" arguments="{navigationClasses: 'hidden-xs'}"/>
+            </div>
+            <div class="col-xs-12">
+                <div class="fluid-column" style="justify-content: space-between;">
+                    <div id="googlemaps-placeholder">
+                        <ccm-overlay third-party-product-title="Google Maps" third-party-product-id="5e1a2e14f926232e097df7cf" description="['This is the first paragraph on why the user should consent.', 'This is the second paragraph.']" button-label="Consent and load Google Maps" button-bg-color="#e52117" button-text-color="#fff" background-image="https://www.inside-digital.de/img/google-maps-neue-funktion.jpg"></ccm-overlay>
+                    </div>
+            
+                    <script>
+                    // Dieses Script hört auf die Einwilligung des Nutzers.
+                    window.addEventListener('ccm:event:third-party-product-accepted', (e) => {
+                        // Wenn das akzeptierte Drittanbieter-Produkt Google Maps ist...
+                        if (e.detail.title === 'Google Maps') {
+                            // ...erstelle ein dynamisches Script...
+                            const googlemapsScript = document.createElement('script');
+                            // ...setze die benötigten Attribute...
+                            googlemapsScript.setAttribute('src', '/reason-why-styleguide/Public/Scripts/reason-why-google-maps.js');
+                            googlemapsScript.setAttribute('type', 'module');
+                            // ...und rendere das Script in den Platzhalter
+                            document.getElementById('googlemaps-placeholder').appendChild(googlemapsScript);
+                            //optimiere Layout
+                            var maps = document.querySelectorAll('.google-map');
+                            maps.forEach(element => {
+                                element.style.display = 'block';
+                            });
+                            document.getElementById('googlemaps-placeholder').style.margin = '0';
+                        }
+                    });
+                    </script>
+                    <v:variable.set name="markers"
+                                    value="{rw:googleMapsMarkersFromNews(news:news,fallbackMarker:'{0:{lat:\'40.73061\',lng:\'-73.935242\'}}', settings:settings)}"/>
+                    <div class="google-map" style="display: none;"
+                         data-google-map="true"
+                         data-google-map-markers='{markers->f:format.raw()}'>
+                        <f:for each="{news}" as="record">
+                            {record.title->rw:inteliText()->f:format.stripTags()}: {record.location} <br/>
+                        </f:for>
+                    </div>
+                    <div class="post-teaser">
+                        <div class="post-teaser-content">
+                            <h2>{contentObjectData.header->rw:inteliText()}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <f:for each="{news}" as="newsItem">
+            <f:render partial="List/EventFullWidthItem" arguments="{newsItem: newsItem, settings:settings, cropVariant: 'teaser'}"/>
+        </f:for>
+    </div>
+</div>
+<f:render partial="Join/SubscribeContent" arguments="{_all}"/>
+</html>

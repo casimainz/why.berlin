@@ -1,0 +1,47 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+     data-namespace-typo3-fluid="true">
+
+
+    <div class="topping">
+        <div class="container">
+            <div class="toastcrumb clearfix">
+                <v:page.info as="uid" field="uid">
+                    <v:page.breadCrumb pageUid="{data.uid}" as="crumbs">
+
+                        <ul>
+
+                            <f:for each="{crumbs}" as="page" iteration="it">
+                                <li>
+                                    <v:page.link
+                                            pageUid="{page.uid}"
+                                            class="{f:if(condition: '{uid}=={page.uid}', then: 'active')}"
+                                    >
+                                        {f:if(condition: it.isFirst, then: 'Home', else: '{page.title}')}
+                                    </v:page.link>
+                                </li>
+                            </f:for>
+
+                            <f:if condition="{news}">
+                                <f:then>
+                                    <v:variable.set name="category" value="{news.categories->v:iterator.first()}" />
+                                    <f:if condition="{category}">
+                                        <li><f:link.page pageUid="{category.shortcut}">{category.title}</f:link.page></li>
+                                    </f:if>
+                                    <li>{news.title->rw:inteliText()->f:format.stripTags()}</li>
+                                </f:then>
+                            </f:if>
+
+                        </ul>
+
+                    </v:page.breadCrumb>
+                </v:page.info>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,56 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<v:variable.set name="media" value="{v:variable.get(name: 'mediaByContentKey.{content_key}')}"/>
+<f:if condition="{media.0}">
+    <f:if condition="{border_box}">
+        <f:then>
+            <div class="border-box" data-check-in-viewport="true">
+                <div class="border-box-content text-center">
+                    <f:link.typolink parameter="{media.0.link}" title="{media.0.title}">
+                        <f:image
+                            image="{media.0}"
+                            title="{media.0.title}"
+                            alt="{media.0.alternative}"
+                            maxWidth="{max_width->v:or(alternative: '1200')}"
+                            class="img-responsive content-image"
+                        />
+                    </f:link.typolink>
+                    <f:if condition="{media.0.originalResource.description} || {media.0.originalResource.properties.content}">
+                        <div class="content-image-caption">
+                            <f:if condition="{media.0.originalResource.description}">
+                                <span>{media.0.originalResource.description->rw:inteliText()}</span>
+                            </f:if>
+                            {media.0.originalResource.properties.content->f:format.html()}
+                        </div>
+                    </f:if>
+                </div>
+            </div>
+        </f:then>
+        <f:else>
+            <div class="text-center">
+                <f:link.typolink parameter="{media.0.link}" title="{media.0.title}">
+                    <f:image
+                            image="{media.0}"
+                            title="{media.0.title}"
+                            alt="{media.0.alternative}"
+                            maxWidth="{max_width->v:or(alternative: '1200')}"
+                            class="img-responsive content-image"
+                    />
+                </f:link.typolink>
+                <f:if condition="{media.0.originalResource.description} || {media.0.originalResource.properties.content}">
+                    <div class="content-image-caption">
+                        <f:if condition="{media.0.originalResource.description}">
+                            <span>{media.0.originalResource.description->rw:inteliText()}</span>
+                        </f:if>
+                        {media.0.originalResource.properties.content->f:format.html()}
+                    </div>
+                </f:if>
+            </div>
+        </f:else>
+    </f:if>
+</f:if>
+
+</html>

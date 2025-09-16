@@ -1,0 +1,25 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" xmlns:v="http://www.w3.org/1999/html"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<div class="" id="news-container-{contentObjectData.uid}">
+    <div class="rw-news__list--wrap">
+        <f:comment>
+            <div class="follow-button">
+                <a target="_blank" href="https://www.facebook.com/reasonwhyberlin/">Follow us on <span class="fa fa-facebook-official"></span></a>
+            </div>
+        </f:comment>  
+
+        <div class="row row-eq-height">
+            <div class="hidden">
+                <f:render partial="../../Partials/Navigation" arguments="{navigationClasses:''}"/>
+            </div>
+
+            <div class="col-xs-12">
+                <f:render partial="List/Item" section="NewTop" arguments="{newsItem: pagination.paginator.paginatedItems.0, settings:settings, showImage: 0, cropVariant: 'teaser_widescreen'}"/>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

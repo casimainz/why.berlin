@@ -1,0 +1,50 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" xmlns:v="http://www.w3.org/1999/html"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<div class="" id="news-container-{contentObjectData.uid}">
+    <div class="rw-news__list--wrap">
+            <f:if condition="{pagination.currentPage} == 1">
+                <f:then>
+                    <div class="explosion explosion-tight explosion-tightest-bottom explosion-gray">
+                        <div class="explosion-content">
+                            <h2 style="margin: 0 15px;">More Tech and Business News</h2>
+                            <div class="row c-newsList_lyt">
+                                <f:for each="{pagination.paginator.paginatedItems}" as="newsItem" iteration="iterator">
+                                    <div class="c-newsList_item">
+                                        <f:render partial="List/Item" section="NewItem" arguments="{newsItem: newsItem,settings:settings,iterator:iterator, showImage: 1, cropVariant: 'teaser'}" />
+                                    </div>
+                                </f:for>
+                            </div>
+                </f:then>
+            </f:if> 
+
+            <f:if condition="{pagination.currentPage} > 1">
+                <f:then>
+                    <div class="js-list-response">
+                        <f:for each="{pagination.paginator.paginatedItems}" as="newsItem" iteration="iterator">
+                            <div class="c-newsList_item">
+                                <f:render partial="List/Item" section="NewItem" arguments="{newsItem: newsItem,settings:settings,iterator:iterator, showImage: 1, cropVariant: 'teaser'}" />
+                            </div>
+                        </f:for>
+                    </div>
+                </f:then>
+            </f:if>              
+        
+            <f:if condition="{pagination.pagination.nextPageNumber} && {pagination.pagination.nextPageNumber} <= {pagination.pagination.lastPageNumber}">
+                <f:then>
+                    <div class="row js-button-wrap">
+                        <div class="post__button-wrapper">
+                            <a class="post__load-button js-load-list-new" href="{f:uri.action(action:actionName, noCache:'true', arguments:{currentPage: pagination.pagination.nextPageNumber})}" title="{f:translate(key:'pagination.next')}">
+                                Load more
+                            </a>
+                        </div>
+                    </div>
+                </f:then>
+            </f:if> 
+            </div>
+        </div> 
+    </div>
+</div>
+</html>

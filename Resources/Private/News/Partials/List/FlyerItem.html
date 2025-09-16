@@ -1,0 +1,66 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{newsItem}">
+    <div class="post-teaser post-teaser-flyer post-teaser-flyer-background-opacity-{opacity}">
+
+        <v:variable.set name="strippedTitle" value="{newsItem.title->rw:inteliText()->f:format.stripTags()}" />
+
+        <div class="post-teaser-image image-container">
+            <f:image
+                    image="{newsItem.media.0}"
+                    title="{newsItem.media.0.title}"
+                    alt="{newsItem.media.0.alternative}"
+                    class="img-responsive"
+                    width="666c"
+                    height="665c"
+                    cropVariant="{cropVariant}"
+            />
+        </div>
+
+        <div class="post-teaser-flyer-content" style="width:100%">
+
+            <f:if condition="{noCategory}==FALSE">
+                <div class="post-teaser-category">
+                    <f:link.page pageUid="{newsItem.firstCategory.shortcut}">
+                        {newsItem.datetime->f:format.date(format: 'd.m.Y')} {newsItem.firstCategory.title}
+                    </f:link.page>
+                </div>
+            </f:if>
+
+            <p class="h2 close-to-next">
+                <n:link
+                        newsItem="{newsItem}"
+                        settings="{settings}"
+                        title="{strippedTitle}"
+                >
+                    {newsItem.title->rw:inteliText()}
+                </n:link>
+            </p>
+
+            <div class="post-teaser-data">
+                <f:render partial="../../Partials/Date" arguments="{startDateTime:newsItem.datetime, endDateTime:newsItem.endDatetime}" />
+            </div>
+
+            <n:link
+                    newsItem="{newsItem}"
+                    settings="{settings}" class="post-teaser-link"
+                    title="{strippedTitle}">
+                Take part
+            </n:link>
+
+            <f:if condition="{noTags}==FALSE">
+                <div class="post-teaser-tags">
+                    <f:for each="{newsItem.tags}" as="tag">
+                        <span>#&nbsp;{tag.title}</span>
+                    </f:for>
+                </div>
+            </f:if>
+        </div>
+    </div>
+</f:if>
+
+</html>

@@ -1,0 +1,43 @@
+    <f:if condition="{pagination.previousPageNumber} && {pagination.previousPageNumber} >= {pagination.firstPageNumber}">
+        <f:then>
+            <f:if condition="{detailNewsItem}">
+                <f:then>
+                    <a class="row-slider-arrow-left"" href="{f:uri.action(addQueryString: 'true', action:'detail', arguments:{currentPage: pagination.previousPageNumber, news: detailNewsItem})}" title="{f:translate(key:'pagination.previous')}">
+                        <span class="glyphicon glyphicon-menu-left"></span>
+                        <span class="sr-only"><f:translate key="paginate_previous"/></span>
+                    </a>
+                </f:then>
+                <f:else>
+                    <a class="row-slider-arrow-left"" href="{f:uri.action(addQueryString: 'true', action:actionName, arguments:{currentPage: pagination.previousPageNumber})}" title="{f:translate(key:'pagination.previous')}">
+                        <span class="glyphicon glyphicon-menu-left"></span>
+                        <span class="sr-only"><f:translate key="paginate_previous"/></span>
+                    </a>
+                </f:else>
+            </f:if>
+        </f:then>
+    </f:if>
+    <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
+        <f:then>
+            <f:if condition="{detailNewsItem}">
+                <f:then>
+                    <a class="row-slider-arrow-right" href="{f:uri.action(addQueryString: 'true', action:'detail', arguments:{currentPage: pagination.nextPageNumber, news: detailNewsItem})}" title="{f:translate(key:'pagination.next')}">
+                        <span class="glyphicon glyphicon-menu-right"></span> <span class="sr-only"><f:translate
+                            key="paginate_next"/></span>
+                    </a>
+                </f:then>
+                <f:else>
+                    <a class="row-slider-arrow-right" href="{f:uri.action(addQueryString: 'true', action:actionName, arguments:{currentPage: pagination.nextPageNumber})}" title="{f:translate(key:'pagination.next')}">
+                        <span class="glyphicon glyphicon-menu-right"></span> <span class="sr-only"><f:translate
+                            key="paginate_next"/></span>
+                    </a>
+                </f:else>
+            </f:if>
+            
+        </f:then>
+        <f:else>
+            <f:comment>
+                <li class="disabled"><span>{f:translate(key:'widget.pagination.next', extensionName: 'fluid')}</span></li>
+                <li class="disabled"><span>last page</span></li>
+            </f:comment>
+        </f:else>
+    </f:if>

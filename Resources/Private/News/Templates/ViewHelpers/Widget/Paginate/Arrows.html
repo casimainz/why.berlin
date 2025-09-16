@@ -1,0 +1,36 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{pagination.previousPage}">
+    <f:if condition="{pagination.previousPage} > 1">
+        <f:then>
+            <f:widget.link class="row-slider-arrow-left"
+                           addQueryStringMethod="GET"
+                           arguments="{currentPage: pagination.previousPage}">
+                <span class="glyphicon glyphicon-menu-left"></span>
+                <span class="sr-only"><f:translate key="paginate_previous"/></span>
+            </f:widget.link>
+        </f:then>
+        <f:else>
+            <f:widget.link class="row-slider-arrow-left"
+                           addQueryStringMethod="GET">
+                <span class="glyphicon glyphicon-menu-left"></span>
+                <span class="sr-only"><f:translate key="paginate_previous"/></span>
+            </f:widget.link>
+        </f:else>
+    </f:if>
+</f:if>
+
+<f:if condition="{pagination.nextPage}">
+    <f:widget.link class="row-slider-arrow-right"
+                   addQueryStringMethod="GET"
+                   arguments="{currentPage: pagination.nextPage}">
+        <span class="glyphicon glyphicon-menu-right"></span> <span class="sr-only"><f:translate
+            key="paginate_next"/></span>
+    </f:widget.link>
+</f:if>
+
+<f:renderChildren arguments="{contentArguments}"/>
+
+</html>

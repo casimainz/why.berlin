@@ -1,0 +1,85 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:n="http://typo3.org/ns/GeorgRinger/News/ViewHelpers" xmlns:v="http://www.w3.org/1999/html"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<div class="" id="news-container-{contentObjectData.uid}">
+    <div class="rw-news__list--wrap">
+
+        <f:comment>
+            <div class="follow-button">
+                <a target="_blank" href="https://www.facebook.com/reasonwhyberlin/">Follow us on <span class="fa fa-facebook-official"></span></a>
+            </div>
+        </f:comment>
+        
+            <f:if condition="{pagination.currentPage} == 1">
+                <f:then>
+                    <div class="row row-eq-height">
+                        <div class="hidden">
+                            <f:render partial="../../Partials/Navigation" arguments="{navigationClasses:'hidden-xs'}"/>
+                        </div>
+            
+                        <div class="col-xs-12 hidden-xs">
+                            <f:render partial="List/Item" section="Top" arguments="{newsItem: pagination.paginator.paginatedItems.0, settings:settings, showImage: 0, cropVariant: 'teaser_widescreen'}"/>
+                        </div>
+            
+                        <div class="col-xs-12 visible-xs">
+                            <f:render partial="List/Item" section="BottomFirst" arguments="{newsItem: pagination.paginator.paginatedItems.0, settings:settings, showImage: 0, cropVariant: 'teaser_widescreen'}"/>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6">
+                            <f:render partial="List/Item" section="BottomFirst" arguments="{newsItem: pagination.paginator.paginatedItems.1, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <f:render partial="List/Item" section="BottomFirst" arguments="{newsItem: pagination.paginator.paginatedItems.2, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+                        </div>
+                    </div>
+                </f:then>
+            </f:if>  
+
+            <f:if condition="{pagination.currentPage} > 1">
+                <f:then>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-4">
+                            <f:render partial="List/Item" section="BottomFirst" arguments="{newsItem: pagination.paginator.paginatedItems.0, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <f:render partial="List/Item" section="BottomFirst" arguments="{newsItem: pagination.paginator.paginatedItems.1, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+                        </div>
+                        <div class="col-sm-4 col-md-4">
+                            <f:render partial="List/Item" section="BottomFirst" arguments="{newsItem: pagination.paginator.paginatedItems.2, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+                        </div>
+                    </div>
+                </f:then>
+            </f:if>              
+            
+    
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <f:render partial="List/Item" section="BottomFirst" arguments="{newsItem: pagination.paginator.paginatedItems.3, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <f:render partial="List/Item" section="BottomFirst" arguments="{newsItem: pagination.paginator.paginatedItems.4, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <f:render partial="List/Item" section="BottomFirst" arguments="{newsItem: pagination.paginator.paginatedItems.5, settings:settings, showImage: 1, cropVariant: 'teaser'}"/>
+                </div>
+            </div>
+        
+
+            <f:if condition="{pagination.pagination.nextPageNumber} && {pagination.pagination.nextPageNumber} <= {pagination.pagination.lastPageNumber}">
+                <f:then>
+                    <div class="row">
+                        <div class="post__button-wrapper">
+                            <a class="post__load-button js-load-list" href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.pagination.nextPageNumber})}" title="{f:translate(key:'pagination.next')}">
+                                Load more
+                            </a>
+                        </div>
+                    </div>
+                </f:then>
+            </f:if>  
+    </div>
+</div>
+</html>

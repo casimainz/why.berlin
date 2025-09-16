@@ -1,0 +1,94 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+>
+    
+    <f:layout name="Plain"/>
+
+    <f:section name="main">
+        <comply-consent-manager apiKey="YYBVR1Y-T2T4FEN-MQF1N3Y-0QMD2G1"></comply-consent-manager>
+        <v:variable.set name="newsCategory" value="{currentNews.categories->v:iterator.first()}"/>
+        <header class="header {f:if(condition:'{isHeaderSmall}', then:'header-small')}">
+
+            <div class="container container-flex-column">
+                <div class="div-flex">
+                    <div class="brand">
+                        <a href="/">
+                            <img alt="Reason Why Brand"
+                                title="reason-why.berlin — Berlin inspires as a creative metropolis, as a start-up hub, as a place for innovative technology and science."
+                                src="/assets/img/reason-why-logo.svg"/>
+                        </a>
+                    </div>
+                    <div class="menu-desktop__wrapper">
+                        <ul class="menu-desktop">
+                            <v:page.menu pageUid="1" as="menu">
+                                <f:for each="{menu}" as="page" iteration="it">
+                                    <li>
+                                        <f:link.page pageUid="{page.uid}"
+                                                    class="menu-link {page.class} {f:if(condition:'{page.uid}=={newsCategory.shortcut}',then:'active')}">
+                                            {page.linktext}
+                                        </f:link.page>
+                                    </li>
+                                </f:for>
+                            </v:page.menu>
+                        </ul>
+        
+                        <div class="menu-desktop__buttons">
+                            <a class="menu-desktop__newsletter-button js-popup-inline"  href="#newsletter-popup">Newsletter</a>
+                        </div>
+                    </div>
+                </div>
+               <f:if condition="{headerNavigationActive}">
+                    <div class="hidden">
+                        <f:render partial="Navigation"
+                                arguments="{navigationClasses: 'hidden-xs', news: currentNews, data: data, hideSearch: 1}"/>
+                    </div>
+                </f:if>
+
+            </div>
+
+        </header>
+
+        <div class="white-popup mfp-hide" id="newsletter-popup">
+            <h3>Stay informed – Subscribe to our Newsletter</h3>
+            <p>Our newsletter offers the latest news as well as useful information about Berlin's economy. Receive regular information about new posts on reason-why.berlin.</p>
+            <div class="popup-bottom">
+                <form action="https://seu2.cleverreach.com/f/248739-305727/wcs/" method="post" target="_blank">
+                        <input name="email" value="" type="text" placeholder="Enter your email..." class="tx-indexedsearch-searchbox-sword form-control" />
+                        <button type="submit" class="popup-bottom__button">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <f:if condition="{headerImage}">
+
+            <div class="header-trailer">
+                <f:image image="{headerImage}"/>
+            </div>
+
+        </f:if>
+
+        <f:if condition="!{isHeaderSmall}">
+            <f:render partial="Topping" arguments="{news: currentNews}"/>
+        </f:if>
+
+        <main class="main">
+            <f:if condition="{isHeaderSmall} && {currentPage.subtitle}">
+                <div class="hero">
+                    <div class="container">
+                        <p class="h4"><f:format.raw>{currentPage.subtitle}</f:format.raw></p>
+                    </div>
+                </div>
+            </f:if>
+            <div class="container">
+                <!--TYPO3SEARCH_begin-->
+                <v:content.render column="0"/>
+                <!--TYPO3SEARCH_end-->
+            </div>
+        </main>
+
+        <f:render partial="Footer"
+                  arguments="{footerClasses: '{f:if(condition:currentNews, else:\'footer-no-sticky-share\')}'}"/>
+
+    </f:section>
+</div>

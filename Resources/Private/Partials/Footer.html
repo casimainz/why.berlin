@@ -1,0 +1,22 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     data-namespace-typo3-fluid="true"
+>
+    <footer class="footer {footerClasses}">
+
+        <ul>
+            <li>&copy; Reason Why Berlin</li>
+            <v:menu pageUid="{settings.footerPid}" as="menu">
+                <f:for each="{menu}" as="page">
+                    <li><f:link.page pageUid="{page.uid}">{page.linktext}</f:link.page></li>
+                </f:for>
+            </v:menu>
+        </ul>
+
+        <a href="https://www.berlin-partner.de/en/">
+            <img src="/fileadmin/user_upload/BPWT-logo_en-positiv.svg" style="width:130px;display: block;margin: 0 auto;padding: 40px 0px 10px;">
+        </a>
+
+    </footer>
+</div>

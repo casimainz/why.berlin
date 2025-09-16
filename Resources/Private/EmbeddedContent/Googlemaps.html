@@ -1,0 +1,45 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:rw="http://typo3.org/ns/Vtm/Rw/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+    <f:alias map="{ocb: '{', ccb: '}'}">
+        <div id="googlemaps-placeholder" style="margin-top: 4rem; margin-bottom: 4rem;">
+            <ccm-overlay third-party-product-title="Google Maps" third-party-product-id="5e1a2e14f926232e097df7cf" description="['This is the first paragraph on why the user should consent.', 'This is the second paragraph.']" button-label="Consent and load Google Maps" button-bg-color="#e52117" button-text-color="#fff" background-image="https://www.inside-digital.de/img/google-maps-neue-funktion.jpg"></ccm-overlay>
+        </div>
+        <script>
+        // Dieses Script hört auf die Einwilligung des Nutzers.
+        window.addEventListener('ccm:event:third-party-product-accepted', (e) => {
+            // Wenn das akzeptierte Drittanbieter-Produkt Google Maps ist...
+            if (e.detail.title === 'Google Maps') {
+            // ...erstelle ein dynamisches Script...
+            const googlemapsScript = document.createElement('script');
+            // ...setze die benötigten Attribute...
+            googlemapsScript.setAttribute('src', '/reason-why-styleguide/Public/Scripts/reason-why-google-maps.js');
+                // googleMapsKey = 'AIzaSyBPofo1Cv_aAsU6xCzo-46sbbYD7AnAr4U';
+            googlemapsScript.setAttribute('type', 'module');
+            // ...und rendere das Script in den Platzhalter
+            document.getElementById('googlemaps-placeholder').appendChild(googlemapsScript);
+            //optimiere Layout
+            var maps = document.querySelectorAll('.google-map');
+            maps.forEach(element => {
+                element.style.display = 'block';
+            });
+            document.getElementById('googlemaps-placeholder').style.margin = '0';
+            }
+        });
+        </script>
+        <v:variable.set name="markers"
+        value='[{ocb}"lat":{latitude->v:or(alternative:record.latitude)},
+        "lng":{longitude->v:or(alternative:record.longitude)},
+        "heading":"{record.title->rw:inteliText()}",
+        "content":"{record.location}"{ccb}]'/>
+        <div class="google-map google-map-explosion no-animation" style="display: none;"
+             data-google-map="true"
+             data-google-map-markers='{markers->f:format.raw()}'
+        >{record.title->rw:inteliText()->f:format.stripTags()}: {alt_text->v:or(alternative:record.location)}
+        </div>
+
+    </f:alias>
+
+</html>
+

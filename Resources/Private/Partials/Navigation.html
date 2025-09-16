@@ -1,0 +1,82 @@
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     data-namespace-typo3-fluid="true">
+
+    <v:variable.set name="newsCategory" value="{news.categories->v:iterator.first()}"/>
+
+    <div class="navigation">
+        <div class="navigation-brand">
+            <a href="/">
+                <img src="/assets/img/reason-why-logo.svg"
+                     alt="Homepage"
+                     title="reason-why.berlin — Berlin inspires as a creative metropolis, as a start-up hub, as a place for innovative technology and science."/>
+            </a>
+        </div>
+        <ul class="menu">
+            <v:menu pageUid="1" as="menu">
+                <f:for each="{menu}" as="page" iteration="it">
+                    <li>
+                        <f:link.page pageUid="{page.uid}"
+                                     class="{page.class} {f:if(condition:'{page.uid}=={newsCategory.shortcut}',then:'active')}">
+                            {page.linktext}
+                        </f:link.page>
+                    </li>
+                </f:for>
+            </v:menu>
+            <a class="navigation__newsletter-button js-popup-inline"  href="#newsletter-popup">Newsletter</a>
+        </ul>
+
+        <f:if condition="{hideSearch}">
+            <f:else>
+                <div class="search-input">
+                    <f:form
+                            controller="Search"
+                            extensionName="indexedsearch"
+                            action="search"
+                            method="post"
+                            id="tx_indexedsearch"
+                            noCache="true"
+                            pageUid="{settings.searchTargetPid}"
+                            pluginName="pi2"
+                    >
+                        <fieldset>
+                            <f:form.hidden name="search[_sections]" value="0"/>
+                            <f:form.hidden name="search[_freeIndexUid]" id="tx_indexedsearch_freeIndexUid" value="_"/>
+                            <f:form.hidden name="search[pointer]" id="tx_indexedsearch_pointer" value="0"/>
+
+                            <label class="sr-only" for="header-search-control-11">
+                                Suchen Sie hier:
+                            </label>
+                            <div class="input-group">
+                                <f:form.textfield
+                                        name="search[sword]"
+                                        id="header-search-control-11"
+                                        class="tx-indexedsearch-searchbox-sword form-control"
+                                        additionalAttributes="{placeholder:'Suchen Sie hier ...'}"
+                                />
+                                <span class="input-group-btn">
+                                    <f:form.button
+                                            type="submit"
+                                            name="search[submitButton]"
+                                            id="tx-indexedsearch-searchbox-button-submit"
+                                            class="tx-indexedsearch-searchbox-button btn btn-default"
+                                    >
+                                        <span class="glyphicon glyphicon-search"></span>
+                                        <span class="sr-only">Suchen</span>
+                                    </f:form.button>
+                            </span>
+                            </div>
+                        </fieldset>
+                    </f:form>
+                </div>
+            </f:else>
+        </f:if>
+
+        <div class="newsletter-sticky-bar">
+            <span>Subscribe to our</span>
+            <a class="navigation__newsletter-button js-popup-inline"  href="#newsletter-popup">Newsletter</a>
+        </div>
+    </div>
+</div>
+
